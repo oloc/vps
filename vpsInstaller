@@ -1,0 +1,28 @@
+# vpsInstaller - Virtual Private Server Installer
+#
+# Need to merge with the version I began at home
+
+. ./${basename $0}.cfg 
+
+_comInst() {
+	typeset ComFile=$1
+	if [ -n ${ComFile} && -s ${ComFile} ] ; then
+		mv ./${ComFile} ${ComDir}/
+		_log "Common: ${ComDir}/${ComFile}"
+	fi
+}
+
+_echo "Packages installation..."
+while read Package
+do
+	if [ -s ${Package}.inst ] ; then
+		echo "Installation of ${Package}..."
+		. ./${Package}.inst
+	else
+		apt-get install -y ${Package}
+	fi
+done < ${PackageList}
+
+_echo "Common installation..."
+_comInst ${AliasesList}
+_comInst ${GlobalsList}
