@@ -10,7 +10,7 @@ With a root profile, create a directory and put the vpsInstaller in it, then lau
 
     mkdir -p /opt/vpsInstaller
     cd /opt/vpsInstaller
-    wget --no-check-certificate https://github.com/oloc/vps/vpsInstaller
+    wget --no-check-certificate https://github.com/oloc/vps/archive/master.tar.gz -O - | tar xz 
     . ./vpsInstaller
 
 ## Groups and users
