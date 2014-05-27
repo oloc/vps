@@ -8,10 +8,10 @@ This project is an installation tool which installs and configures the basics on
 ## Installation and use
 With a root profile, create a directory and put the vpsInstaller in it, then launch the vpsInstaller. Here are the commands:
 
-mkdir -p /opt/vpsInstaller
-cd /opt/vpsInstaller
-wget --no-check-certificate https://github.com/oloc/vps/vpsInstaller
-. ./vpsInstaller
+    mkdir -p /opt/vpsInstaller
+    cd /opt/vpsInstaller
+    wget --no-check-certificate https://github.com/oloc/vps/vpsInstaller
+    . ./vpsInstaller
 
 ## Groups and users
 It creates the group admin and my own user oloc
