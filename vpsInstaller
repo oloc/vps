@@ -3,10 +3,6 @@
 # 28/05/2014 - oloc - First version
 
 Name=$(basename $0)
-User=oloc
-ComDir=/home/common
-LogDir=/var/log
-LogFile=${LogDir}/${Name}.$(date +%Y%m%d).$(date +%H%M%S).log
 
 ###########
 # Functions
@@ -33,20 +29,16 @@ _mkdir() {
 	fi
 }
 
+########################
+# Load the configuration
+_echo "Loading configuration..."
+. ./${Name}.cfg 
+
 ###################
 # Start annoucement
 _log "${Name} - start."
 _log "Log is here: ${LogFile}"
 
-_echo "Loading configuration..."
-. ./${Name}.cfg 
-
-_echo "Groups and users creation..."
-addgroup admin --system
-adduser ${User} --groups admin sudo
-
-_echo "Directories creation..."
-_mkdir ${ComDir}
 
 
 _echo "Packages installation..."
@@ -59,6 +51,14 @@ do
 		apt-get install -y ${Package} | tee -a ${LogFile}
 	fi
 done < ${PackageList}
+
+_echo "Groups and users creation..."
+addgroup admin --system
+useradd --create-home --groups admin,sudo ${User}
+echo "${User} ALL=(ALL:ALL) ALL /etc/sudoers.d/admin
+
+_echo "Directories creation..."
+_mkdir ${ComDir}
 
 _echo "Common installation..."
 _comInst ${AliasesList}
