@@ -1,9 +1,15 @@
 # vpsInstaller - Virtual Private Server Installer
 #
-# Need to merge with the version I began at home
+# 28/05/2014 - oloc - First version
 
-. ./${basename $0}.cfg 
+Name=$(basename $0)
+User=oloc
+ComDir=/home/common
+LogDir=/var/log
+LogFile=${LogDir}/${Name}.$(date +%Y%m%d).$(date +%H%M%S).log
 
+###########
+# Functions
 _comInst() {
 	typeset ComFile=$1
 	if [ -n ${ComFile} && -s ${ComFile} ] ; then
@@ -11,18 +17,54 @@ _comInst() {
 		_log "Common: ${ComDir}/${ComFile}"
 	fi
 }
+_echo() {
+        echo "$(date +%Y%m%d-%H%M%S) - $1" | tee -a ${LogFile}
+}
+_log() {
+        echo "$(date +%Y%m%d-%H%M%S) * $1" >> ${LogFile}
+}
+_mkdir() {
+	typeset Dir=$1
+	if [ -d ${Dir} ] ; then
+		_log "${Dir} already exists."
+	else
+		mkdir -p ${Dir}
+		_log "Creation of ${Dir}"
+	fi
+}
+
+###################
+# Start annoucement
+_log "${Name} - start."
+_log "Log is here: ${LogFile}"
+
+_echo "Loading configuration..."
+. ./${Name}.cfg 
+
+_echo "Groups and users creation..."
+addgroup admin --system
+adduser ${User} --groups admin sudo
+
+_echo "Directories creation..."
+_mkdir ${ComDir}
+
 
 _echo "Packages installation..."
 while read Package
 do
+	_echo "Installation of ${Package}..."
 	if [ -s ${Package}.inst ] ; then
-		echo "Installation of ${Package}..."
-		. ./${Package}.inst
+		. ./${Package}.inst | tee -a ${LogFile}
 	else
-		apt-get install -y ${Package}
+		apt-get install -y ${Package} | tee -a ${LogFile}
 	fi
 done < ${PackageList}
 
 _echo "Common installation..."
 _comInst ${AliasesList}
 _comInst ${GlobalsList}
+
+###################
+# End annoucement
+_echo "Your VPS is ready."
+_log "${Name} - end."
