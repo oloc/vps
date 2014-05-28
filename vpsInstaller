@@ -45,9 +45,9 @@ while read Package
 do
 	_echo "Installation of ${Package}..."
 	if [ -s ${Package}.inst ] ; then
-		. ${WrkDir}/${Package}.inst | tee -a ${LogFile}
+		. ${WrkDir}/${Package}.inst 2>&1 1>${LogFile}
 	else
-		apt-get install -y ${Package} | tee -a ${LogFile}
+		apt-get install -y ${Package} 2>&1 1>${LogFile}
 	fi
 done < ${WrkDir}/${PackageList}
 
