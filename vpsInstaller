@@ -41,21 +41,25 @@ _log "${Name} - start."
 _log "Log is here: ${LogFile}"
 
 _echo "Packages installation..."
-while read Package
-do
-	_echo "Installation of ${Package}..."
-	if [ -s ${Package}.inst ] ; then
-		${WrkDir}/${Package}.inst     2>&1 | tee -a ${LogFile}
-	else
-		apt-get install -y ${Package} 2>&1 | tee -a ${LogFile}
-	fi
-done < ${WrkDir}/${PackageList}
+if [ -r ${WrkDir}/${PackageList} ] ; then
+	while read Package
+	do
+		_echo "Installation of ${Package}..."
+		if [ -s ${Package}.inst ] ; then
+			${WrkDir}/${Package}.inst     2>&1 | tee -a ${LogFile}
+		else
+			apt-get install -y ${Package} 2>&1 | tee -a ${LogFile}
+		fi
+	done < ${WrkDir}/${PackageList}
+fi
 
 _echo "Groups and users creation..."
-if [ ! $(cut -d ":" -f 1 /etc/group | grep admin) ] ; then
+SearchGroup=$(cut -d ":" -f 1 /etc/group | grep admin)
+if [ -z ${SearchGroup} ] ; then
 	addgroup admin --system
 fi
-if [ ! $(cut -d ":" -f 1 /etc/passwd | grep ${User} ] ; then
+SearchUser=$(cut -d ":" -f 1 /etc/passwd | grep ${User})
+if [ -z ${SearchUser} ] ; then
 	useradd --create-home --groups admin,sudo --password $(mkpasswd -H md5 ${User}) ${User}
 	echo "${User} ALL=(ALL:ALL) ALL" > /etc/sudoers.d/admin
 fi
