@@ -3,13 +3,14 @@
 # 28/05/2014 - oloc - First version
 
 Name=$(basename $0)
+WrkDir=$(dirname $0)
 
 ###########
 # Functions
 _comInst() {
 	typeset ComFile=$1
 	if [ -n ${ComFile} && -s ${ComFile} ] ; then
-		mv ./${ComFile} ${ComDir}/
+		mv ${WrkDir}/${ComFile} ${ComDir}/
 		_log "Common: ${ComDir}/${ComFile}"
 	fi
 }
@@ -32,21 +33,19 @@ _mkdir() {
 ########################
 # Load the configuration
 _echo "Loading configuration..."
-. ./${Name}.cfg 
+. ${WrkDir}/${Name}.cfg 
 
 ###################
 # Start annoucement
 _log "${Name} - start."
 _log "Log is here: ${LogFile}"
 
-
-
 _echo "Packages installation..."
 while read Package
 do
 	_echo "Installation of ${Package}..."
 	if [ -s ${Package}.inst ] ; then
-		. ./${Package}.inst | tee -a ${LogFile}
+		. ${WrkDir}/${Package}.inst | tee -a ${LogFile}
 	else
 		apt-get install -y ${Package} | tee -a ${LogFile}
 	fi
@@ -63,6 +62,16 @@ _mkdir ${ComDir}
 _echo "Common installation..."
 _comInst ${AliasesList}
 _comInst ${GlobalsList}
+
+cat >> $(grep ${User} /etc/passwd | cut -d ":" -f 6)/.bash_aliases << EOF
+# Added by vpsInstaller
+if [ -f ${ComDir}/${AliasesList} ] ; then
+	. ${ComDir}/${AliasesList}
+fi
+if [ -f ${ComDir}/${GlobalsList} ] ; then
+	. ${ComDir}/${GlobalsList}
+fi
+EOF
 
 ###################
 # End annoucement
