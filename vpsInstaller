@@ -54,7 +54,7 @@ done < ${WrkDir}/${PackageList}
 _echo "Groups and users creation..."
 addgroup admin --system
 useradd --create-home --groups admin,sudo ${User}
-echo "${User} ALL=(ALL:ALL) ALL /etc/sudoers.d/admin
+echo "${User} ALL=(ALL:ALL) ALL /etc/sudoers.d/admin"
 
 _echo "Directories creation..."
 _mkdir ${ComDir}
@@ -63,8 +63,8 @@ _echo "Common installation..."
 _comInst ${AliasesList}
 _comInst ${GlobalsList}
 
-cat > $(grep ${User} /etc/passwd | cut -d ":" -f 6)/.bash_aliases << EOF
-\# Added by vpsInstaller
+cat > $(grep ${User} /etc/passwd | cut -d ":" -f 6)/.bash_aliases <<EOF
+# Added by vpsInstaller
 if [ -f ${ComDir}/${AliasesList} ] ; then
 	. ${ComDir}/${AliasesList}
 fi
