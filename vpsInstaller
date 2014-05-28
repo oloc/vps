@@ -63,7 +63,7 @@ _echo "Common installation..."
 _comInst ${AliasesList}
 _comInst ${GlobalsList}
 
-cat >> $(grep ${User} /etc/passwd | cut -d ":" -f 6)/.bash_aliases << EOF
+cat > $(grep ${User} /etc/passwd | cut -d ":" -f 6)/.bash_aliases << EOF
 # Added by vpsInstaller
 if [ -f ${ComDir}/${AliasesList} ] ; then
 	. ${ComDir}/${AliasesList}
