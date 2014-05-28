@@ -49,7 +49,7 @@ do
 	else
 		apt-get install -y ${Package} | tee -a ${LogFile}
 	fi
-done < ${PackageList}
+done < ${WrkDir}/${PackageList}
 
 _echo "Groups and users creation..."
 addgroup admin --system
