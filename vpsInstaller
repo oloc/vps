@@ -9,7 +9,7 @@ WrkDir=$(dirname $0)
 # Functions
 _comInst() {
 	typeset ComFile=$1
-	if [ -n ${ComFile} && -s ${ComFile} ] ; then
+	if [[ -n ${ComFile} && -s ${ComFile} ]] ; then
 		mv ${WrkDir}/${ComFile} ${ComDir}/
 		_log "Common: ${ComDir}/${ComFile}"
 	fi
