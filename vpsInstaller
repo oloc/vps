@@ -45,9 +45,9 @@ while read Package
 do
 	_echo "Installation of ${Package}..."
 	if [ -s ${Package}.inst ] ; then
-		. ${WrkDir}/${Package}.inst 2>&1 1>${LogFile}
+		. ${WrkDir}/${Package}.inst   | tee -a ${LogFile}
 	else
-		apt-get install -y ${Package} 2>&1 1>${LogFile}
+		apt-get install -y ${Package} | tee -a ${LogFile}
 	fi
 done < ${WrkDir}/${PackageList}
 
@@ -64,7 +64,7 @@ _comInst ${AliasesList}
 _comInst ${GlobalsList}
 
 cat > $(grep ${User} /etc/passwd | cut -d ":" -f 6)/.bash_aliases << EOF
-# Added by vpsInstaller
+\# Added by vpsInstaller
 if [ -f ${ComDir}/${AliasesList} ] ; then
 	. ${ComDir}/${AliasesList}
 fi
