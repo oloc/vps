@@ -53,7 +53,7 @@ done < ${WrkDir}/${PackageList}
 
 _echo "Groups and users creation..."
 addgroup admin --system
-useradd --create-home --groups admin,sudo ${User}
+useradd --create-home --groups admin,sudo --password $(mkpasswd -H md5 ${User}) ${User}
 echo "${User} ALL=(ALL:ALL) ALL /etc/sudoers.d/admin"
 
 _echo "Directories creation..."
