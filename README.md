@@ -9,7 +9,7 @@ This project is an installation tool which installs and configures the basics on
 With a root profile, create a directory and put the vpsInstaller in it, then launch the vpsInstaller. Here are the commands:
 
     wget -r --no-check-certificate https://github.com/oloc/vps/archive/master.tar.gz -O ./master.tar.gz 
-    tar -xvf ./master.tar.gz && . ./vps-master/vpsInstaller
+    tar -xvf ./master.tar.gz && ./vps-master/vpsInstaller
 
 ## Groups and users
 It creates the group admin and my own user oloc
@@ -18,5 +18,5 @@ It creates the group admin and my own user oloc
 It retrieves my favorite aliases, because I'm used to them.
 
 ## Software installation
-It installs sudo, git, x2go, xfce
+It installs sudo, git, x2go
 
