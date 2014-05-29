@@ -46,7 +46,7 @@ _comInst ${AliasesList}
 _comInst ${GlobalsList}
 
 cat > $(grep ${User} /etc/passwd | cut -d ":" -f 6)/.bash_aliases <<EOF
-\# Added by vpsInstaller
+# Added by vpsInstaller
 if [ -f ${ComDir}/${AliasesList} ] ; then
 	. ${ComDir}/${AliasesList}
 fi
