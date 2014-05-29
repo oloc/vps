@@ -1,6 +1,6 @@
 echo "Adding x2go repository in the apt sources..."
 apt-key adv --recv-keys --keyserver keys.gnupg.net E1F958385BFE2B6E
-cat > /etc/apt/sources.list.d/x2go.list << EOF
+cat > /etc/apt/sources.list.d/x2go.list <<EOF
 # X2Go Repository (release builds)
 deb http://packages.x2go.org/debian wheezy main
 # X2Go Repository (sources of release builds)
