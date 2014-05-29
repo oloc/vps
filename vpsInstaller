@@ -54,13 +54,13 @@ if [ -r ${WrkDir}/${PackageList} ] ; then
 fi
 
 _echo "Groups and users creation..."
-SearchGroup=$(cut -d: -f 1 /etc/group | grep admin)
+SearchGroup=$(cut -d: -f 1 /etc/group | grep ${Group})
 if [ -z ${SearchGroup} ] ; then
-	addgroup admin --system
+	addgroup ${Group} --system
 fi
 SearchUser=$(cut -d: -f 1 /etc/passwd | grep ${User})
 if [ -z ${SearchUser} ] ; then
-	useradd --create-home --groups admin,sudo --password $(mkpasswd -H md5 ${User}) ${User}
+	useradd --create-home --groups ${Group},sudo --password $(mkpasswd -H md5 ${User}) ${User}
 	echo "${User} ALL=(ALL:ALL) ALL" > /etc/sudoers.d/admin
 fi
 
