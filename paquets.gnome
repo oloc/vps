@@ -5,3 +5,4 @@ git
 x2go
 gdm gnome-core xfonts-base xserver-xorg
 virtualbox virtualbox-dkms virtualbox-guest-utils virtualbox-qt virtualbox-source
+unzip
