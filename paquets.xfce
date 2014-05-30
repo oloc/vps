@@ -3,12 +3,5 @@ whois
 bash-completion
 git
 x2go
-xdm
-xfce4
-xfonts-base
-xserver-xorg
-virtualbox
-virtualbox-dkms
-virtualbox-guest-utils
-virtualbox-guest-additions
-virtualbox-qt
+xdm xfce4 xfonts-base xserver-xorg
+virtualbox virtualbox-dkms virtualbox-guest-utils virtualbox-guest-additions virtualbox-qt
