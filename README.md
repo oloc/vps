@@ -36,5 +36,5 @@ Then you launch the vpsInstaller and you can go take a mug of coffee in order to
 ## To know
 All the hardcasted definition are in the vpsInstaller.cfg. I mean the files name, the directories location, the group and the user.
 
-The <PackageList> (packages.lst in this version) is the list of the packages to install (surprised !?). If a package need a specific way to be installed, you can create a <package name>.inst and script on it. See the x2go example.
-The <AliasesList> (aliases.cfg in this version) is the file with the aliases added to the created user. Same for the <GlobalsList> (var.cfg in this version) which contains the globale variables to set with the created user. Actually these files are put in the <ComDir> and a .bash_aliases is set as it should be to take them into account.
+The \<PackageList\> (packages.lst in this version) is the list of the packages to install (surprised !?). If a package need a specific way to be installed, you can create a \<package name\>.inst and script on it. See the x2go example.
+The \<AliasesList\> (aliases.cfg in this version) is the file with the aliases added to the created user. Same for the \<GlobalsList\> (var.cfg in this version) which contains the globale variables to set with the created user. Actually these files are put in the \<ComDir\> and a .bash_aliases is set as it should be to take them into account.
