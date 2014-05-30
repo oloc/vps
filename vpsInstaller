@@ -1,5 +1,6 @@
 # vpsInstaller - Virtual Private Server Installer
 #
+# 30/05/2014 - oloc - V 1.1 - Multi-packages in one line of <PackageList>
 # 28/05/2014 - oloc - First version
 
 Name=$(basename $0)
@@ -23,6 +24,7 @@ if [ -r ${WrkDir}/${PackageList} ] ; then
 		_echo "Installation of ${Package}..."
 		if [ $(echo ${Package} | wc -w) -eq 1 ] ; then
 			if [ -s ${Package}.inst ] ; then
+				_log "${WrkDir}/${Package}"
 				${WrkDir}/${Package}.inst     2>&1 | tee -a ${LogFile}
 			else
 				apt-get install -y ${Package} 2>&1 | tee -a ${LogFile}
