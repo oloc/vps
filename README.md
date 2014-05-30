@@ -7,7 +7,7 @@ This project is an installation tool which installs and configures the basics on
 * Creation of a system group
 * Creation of my own user to avoid the usage of root
 * Installation of the packages in the package.lst
-* Installtation of aliases I like to use
+* Installation of aliases I like to use
 
 ## Installation and use
 With a root profile, create a directory and put the vpsInstaller in it, then launch the vpsInstaller.
@@ -15,13 +15,16 @@ The retrievong is a wget instead of a git something because git is not installed
 
 #### If you were me
 Just copy/paste and launch the 2 lines below, and you will install the exact same configuration than mine.
+
     wget -r --no-check-certificate https://github.com/oloc/vps/archive/master.tar.gz -O ./master.tar.gz 
     tar -xvf ./master.tar.gz && ./vps-master/vpsInstaller
 
 #### If I were you
 I suggest to retrieve the stuff and tweak some parts.
+
     wget -r --no-check-certificate https://github.com/oloc/vps/archive/master.tar.gz -O ./master.tar.gz 
     tar -xvf ./master.tar.gz
+
 Here you have to modify with your own choices the files:
 * vpsInstaller.cfg 
 * packages.lst
