@@ -4,5 +4,6 @@ bash-completion
 git
 x2go
 gdm gnome-core xfonts-base xserver-xorg
+dkms
 virtualbox virtualbox-dkms virtualbox-guest-utils virtualbox-qt virtualbox-source
 unzip
