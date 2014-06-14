@@ -1,0 +1,7 @@
+echo "Adding the puppet repository..."
+
+wget -q https://apt.puppetlabs.com/puppetlabs-release-stable.deb -O /tmp/puppetlabs-release-stable.deb
+dpki -i /tmp/puppetlabs-release-stable.deb
+
+apt-get update
+apt-get install -y puppet puppetmaster

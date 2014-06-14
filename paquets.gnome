@@ -6,9 +6,4 @@ x2go
 unzip
 # Gnome 
 gdm gnome-core xfonts-base xserver-xorg
-# Puppet Enterprise 3.2 All Nodes
-pciutils dmidecode cron libxml2 hostname libldap-2.4-2 libreadline5 virt-what
-# Puppet Enterprise 3.2 Master Node
-file libmagic1 libpcre3 curl perl mime-support libapr1 libcap2 libaprutil1 libaprutil1-dbd-sqlite3 libaprutil1-ldap libjpeg62
-
-
+puppet puppetmaster
