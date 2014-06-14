@@ -5,3 +5,7 @@ dpki -i /tmp/puppetlabs-release-stable.deb
 
 apt-get update
 apt-get install -y puppetmaster-passenger
+
+echo "Upgrading..."
+apt-get update
+puppet resource package puppetmaster ensure=latest
