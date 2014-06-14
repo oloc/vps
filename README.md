@@ -31,6 +31,7 @@ Here you have to modify with your own choices the files:
 * var.cfg
 * The target of the \<PackageList\> link in the \<PkgDir\>
 Then you launch the vpsInstaller and you can go take a mug of coffee in order to wait the job:
+
     ./vps-master/vpsInstaller
 
 ## To know
