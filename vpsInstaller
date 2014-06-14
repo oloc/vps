@@ -18,7 +18,7 @@ echo "Loading configuration..."
 _log "${Name} - start."
 _log "Log is here: ${LogFile}"
 _log "Configuration is here: ${Name}.cfg"
-_log "$(grep -v '#' vpsInstaller.cfg | sed '/^$/d'"
+#_log "$(grep -v '#' vpsInstaller.cfg | sed '/^$/d'"
 
 _echo "Set the sources to main..."
 mv /etc/apt/sources.list /etc/apt/sources.origin
