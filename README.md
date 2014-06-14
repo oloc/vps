@@ -41,6 +41,6 @@ The \<AliasesList\> (aliases.cfg in this version) is the file with the aliases a
 
 ## Versions
 #### V 1.2 - 14/06/2014
-Add availability of comments in the \<PackageList\>
-Remove the VirtualBox packages from the \<PackageList\>
-Add the Puppet Enterprise 3.2 packages in the \<PackageList\>
+* Add availability of comments in the \<PackageList\>
+* Remove the VirtualBox packages from the \<PackageList\>
+* Add the Puppet Enterprise 3.2 packages in the \<PackageList\>
