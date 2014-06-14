@@ -1,5 +1,6 @@
 # vpsInstaller - Virtual Private Server Installer
 #
+# 14/06/2014 - oloc - V 1.2 - Add availability of comments in the <PackageList>
 # 30/05/2014 - oloc - V 1.1 - Multi-packages in one line of <PackageList>
 # 28/05/2014 - oloc - First version
 
@@ -17,20 +18,40 @@ _echo "Loading configuration..."
 _log "${Name} - start."
 _log "Log is here: ${LogFile}"
 
+_echo "Set the sources to main..."
+mv /etc/apt/sources.list /etc/apt/sources.origin
+cat > /etc/apt/sources.list <<EOF
+deb http://ftp.fr.debian.org/debian/ wheezy main
+deb-src http://ftp.fr.debian.org/debian/ wheezy main
+
+deb http://security.debian.org/ wheezy/updates main
+deb-src http://security.debian.org/ wheezy/updates main
+
+deb http://ftp.fr.debian.org/debian/ wheezy-updates main
+deb-src http://ftp.fr.debian.org/debian/ wheezy-updates main
+EOF
+
+_echo "Update the repository..."
+apt-get update
+
 _echo "Packages installation..."
 if [ -r ${WrkDir}/${PackageList} ] ; then
 	while read Package
 	do
-		_echo "Installation of ${Package}..."
-		if [ $(echo ${Package} | wc -w) -eq 1 ] ; then
-			if [ -s ${Package}.inst ] ; then
-				_log "${WrkDir}/${Package}"
-				${WrkDir}/${Package}.inst     2>&1 | tee -a ${LogFile}
+		if [ $(echo ${Package} | cut -c1) == '#' ] ; then
+			_log "$(echo ${Package} | cut -c2-)"
+		else
+			_echo "Installation of ${Package}..."
+			if [ $(echo ${Package} | wc -w) -eq 1 ] ; then
+				if [ -s ${Package}.inst ] ; then
+					_log "${WrkDir}/${Package}"
+					${WrkDir}/${Package}.inst     2>&1 | tee -a ${LogFile}
+				else
+					apt-get install -y ${Package} 2>&1 | tee -a ${LogFile}
+				fi
 			else
 				apt-get install -y ${Package} 2>&1 | tee -a ${LogFile}
 			fi
-		else
-			apt-get install -y ${Package} 2>&1 | tee -a ${LogFile}
 		fi
 	done < ${WrkDir}/${PackageList}
 fi
