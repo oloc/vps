@@ -37,7 +37,7 @@ _echo "Update the repository..."
 apt-get update
 
 _echo "Packages installation..."
-if [ -r ${PkgDir}/${PackageList} ] ; then
+if [ -r ${WrkDir}/${PkgDir}/${PackageList} ] ; then
 	while read Package
 	do
 		if [ "$(echo ${Package} | cut -c1)" == '#' ] ; then
@@ -45,9 +45,9 @@ if [ -r ${PkgDir}/${PackageList} ] ; then
 		else
 			_echo "Installation of ${Package}..."
 			if [ $(echo ${Package} | wc -w) -eq 1 ] ; then
-				if [ -s ${InstDir}/${Package}.inst ] ; then
+				if [ -s ${WrkDir}/${InstDir}/${Package}.inst ] ; then
 					_log "${InstDir}/${Package}"
-					${InstDir}/${Package}.inst    2>&1 | tee -a ${LogFile}
+					${WrkDir}/${InstDir}/${Package}.inst    2>&1 | tee -a ${LogFile}
 				else
 					apt-get install -y ${Package} 2>&1 | tee -a ${LogFile}
 				fi
@@ -55,7 +55,7 @@ if [ -r ${PkgDir}/${PackageList} ] ; then
 				apt-get install -y ${Package} 2>&1 | tee -a ${LogFile}
 			fi
 		fi
-	done < ${PkgDir}/${PackageList}
+	done < ${WrkDir}/${PkgDir}/${PackageList}
 fi
 
 _echo "Groups and users creation..."
