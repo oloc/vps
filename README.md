@@ -32,7 +32,7 @@ Here you have to modify with your own choices the files:
 * The target of the \<PackageList\> link in the \<PkgDir\>
 Then you launch the vpsInstaller and you can go take a mug of coffee in order to wait the job:
 
-    ./vps-master/vpsInstaller
+     ./vps-master/vpsInstaller
 
 ## To know
 All the hardcasted definition are in the vpsInstaller.cfg. I mean the files name, the directories location, the group and the user.
