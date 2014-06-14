@@ -9,7 +9,7 @@ WrkDir=$(dirname $0)
 
 ########################
 # Load the configuration
-_echo "Loading configuration..."
+echo "Loading configuration..."
 . ${WrkDir}/${Name}.lib 
 . ${WrkDir}/${Name}.cfg 
 
@@ -38,7 +38,7 @@ _echo "Packages installation..."
 if [ -r ${WrkDir}/${PackageList} ] ; then
 	while read Package
 	do
-		if [ $(echo ${Package} | cut -c1) == '#' ] ; then
+		if [ "$(echo ${Package} | cut -c1)" == '#' ] ; then
 			_log "$(echo ${Package} | cut -c2-)"
 		else
 			_echo "Installation of ${Package}..."
