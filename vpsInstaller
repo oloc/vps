@@ -17,6 +17,8 @@ echo "Loading configuration..."
 # Start annoucement
 _log "${Name} - start."
 _log "Log is here: ${LogFile}"
+_log "Configuration is here: ${Name}.cfg"
+_log "$(grep -v '#' vpsInstaller.cfg | sed '/^$/d'"
 
 _echo "Set the sources to main..."
 mv /etc/apt/sources.list /etc/apt/sources.origin
@@ -35,7 +37,7 @@ _echo "Update the repository..."
 apt-get update
 
 _echo "Packages installation..."
-if [ -r ${WrkDir}/${PackageList} ] ; then
+if [ -r ${PkgDir}/${PackageList} ] ; then
 	while read Package
 	do
 		if [ "$(echo ${Package} | cut -c1)" == '#' ] ; then
@@ -43,9 +45,9 @@ if [ -r ${WrkDir}/${PackageList} ] ; then
 		else
 			_echo "Installation of ${Package}..."
 			if [ $(echo ${Package} | wc -w) -eq 1 ] ; then
-				if [ -s ${Package}.inst ] ; then
-					_log "${WrkDir}/${Package}"
-					${WrkDir}/${Package}.inst     2>&1 | tee -a ${LogFile}
+				if [ -s ${InstDir}/${Package}.inst ] ; then
+					_log "${InstDir}/${Package}"
+					${InstDir}/${Package}.inst    2>&1 | tee -a ${LogFile}
 				else
 					apt-get install -y ${Package} 2>&1 | tee -a ${LogFile}
 				fi
@@ -53,7 +55,7 @@ if [ -r ${WrkDir}/${PackageList} ] ; then
 				apt-get install -y ${Package} 2>&1 | tee -a ${LogFile}
 			fi
 		fi
-	done < ${WrkDir}/${PackageList}
+	done < ${PkgDir}/${PackageList}
 fi
 
 _echo "Groups and users creation..."

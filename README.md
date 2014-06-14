@@ -27,19 +27,24 @@ I suggest to retrieve the stuff and tweak some parts.
 
 Here you have to modify with your own choices the files:
 * vpsInstaller.cfg 
-* packages.lst
 * aliases.cfg
 * var.cfg
+* The target of the \<PackageList\> link in the \<PkgDir\>
 Then you launch the vpsInstaller and you can go take a mug of coffee in order to wait the job:
     ./vps-master/vpsInstaller
 
 ## To know
 All the hardcasted definition are in the vpsInstaller.cfg. I mean the files name, the directories location, the group and the user.
 
-The \<PackageList\> (packages.lst in this version) is the list of the packages to install (surprised !?). If a package need a specific way to be installed, you can create a \<package name\>.inst and script on it. See the x2go example.
+The \<PackageList\> (the link named current in this version) is the list of the packages to install (surprised !?). If a package need a specific way to be installed, you can create a \<package name\>.inst in the \<InstDir\> and script on it. See the x2go example.
 The \<AliasesList\> (aliases.cfg in this version) is the file with the aliases added to the created user. Same for the \<GlobalsList\> (var.cfg in this version) which contains the globale variables to set with the created user. Actually these files are put in the \<ComDir\> and a .bash_aliases is set as it should be to take them into account.
 
 ## Versions
+#### V 1.3 - 14/06/2014
+* Move the \<PackageList\> in a specific directory \<PkgDir\>
+* Move the \<package name\>.inst in a specific directory \<InstDir\>
+* Add a link for the current packages list
+
 #### V 1.2 - 14/06/2014
 * Add availability of comments in the \<PackageList\>
 * Remove the VirtualBox packages from the \<PackageList\>
