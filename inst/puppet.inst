@@ -4,4 +4,4 @@ wget -q https://apt.puppetlabs.com/puppetlabs-release-stable.deb -O /tmp/puppetl
 dpki -i /tmp/puppetlabs-release-stable.deb
 
 apt-get update
-apt-get install -y puppet puppetmaster
+apt-get install -y puppetmaster-passenger
