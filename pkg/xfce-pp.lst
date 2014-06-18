@@ -1,0 +1,9 @@
+sudo
+whois
+bash-completion
+git
+x2go
+unzip
+# XFCE
+xdm xfce4 xfonts-base xserver-xorg
+puppet
